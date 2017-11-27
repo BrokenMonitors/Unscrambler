@@ -1,0 +1,128 @@
+*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package unscrambler;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.*;
+/**
+ *
+ * @author Josh
+ */
+public class Unscrambler {
+
+    /**
+     * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
+     */
+    public static void main(String[] args) throws FileNotFoundException {
+        // TODO code application logic here
+        String e = " ";
+        ArrayList<String> Original = new ArrayList<>();
+        ArrayList<String> yy = new ArrayList<>();
+        
+        Scanner in = new Scanner(System.in);
+        
+        /*
+        while(1 == 1){
+            String b = in.nextLine();
+            if(b.equals("-1")) break;
+            b.trim();
+            String a = "";
+            for(int x = 0; x < b.length(); x++)
+            {
+                if(b.charAt(x) == ' ') continue;
+                a+= b.charAt(x);
+            }
+            System.out.println(a);
+            String ree = "";
+            yy.add(b.toLowerCase());
+            Original.add(a.toLowerCase());
+        }
+*/
+
+        Scanner abc;
+        abc = new Scanner(new FileReader("touse.txt"));
+        
+        while(abc.hasNextLine())
+        {
+            
+            String b = abc.nextLine();
+            if(b.equals("")) continue;
+            b.trim();
+            String a = "";
+            for(int x = 0; x < b.length(); x++)
+            {
+                if(b.charAt(x) == ' ') continue;
+                a+= b.charAt(x);
+            }
+            
+            String ree = "";
+            yy.add(b.toLowerCase());
+            Original.add(a.toLowerCase());
+            
+        }
+
+        abc = new Scanner(new FileReader("always.txt"));
+        ArrayList<String> toPrint = new ArrayList<>();
+        while(abc.hasNext()){
+            toPrint.add(abc.next());
+        }
+        ArrayList<String> Orig = new ArrayList<>();
+        for(int x = 0; x < Original.size(); x++)
+        {
+            
+            char[] arr = Original.get(x).trim().toCharArray();
+            Arrays.sort(arr);
+            
+            
+            char[] gg = arr;
+            
+            
+            Orig.add(Arrays.toString(gg));
+            
+        }
+        ArrayList<String> Pry = new ArrayList<>();
+        for(int x = 0; x < Original.size(); x++){
+            Pry.add(Orig.get(x).toLowerCase().trim());
+            
+        }
+        ArrayList<String> List = new ArrayList<>();
+        System.out.println("\n\nEnter in the jumbled words:");
+        while(1 == 1){
+            String v = in.nextLine();
+            if(v.equalsIgnoreCase("end")) break;
+            v.trim();
+            String a = "";
+            for(int x = 0; x < v.length(); x++)
+            {
+                if(v.charAt(x) == ' ') continue;
+                a+= v.charAt(x);
+            }
+            List.add(v.toLowerCase().trim());
+            
+        }
+        ArrayList<String> Li = new ArrayList<>();
+        for(int x = 0; x < List.size(); x++)
+        {
+            char[] arr = List.get(x).toLowerCase().toCharArray();
+            
+            Arrays.sort(arr);
+            
+            Li.add(Arrays.toString(arr));
+        }
+        
+        //checking
+        for(int x = 0; x < Li.size(); x++)
+        {
+            String c = "";
+            if(!Orig.contains(Li.get(x))) c  = "Not found";
+            else c = yy.get(Orig.indexOf(Li.get(x)));
+            System.out.println((x+1) + ": " + List.get(x) + " = " + c);
+        }
+        
+    }
+    
+}
